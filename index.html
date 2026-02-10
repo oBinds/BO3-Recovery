@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BO3 Recovery Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ================= GLOBAL ================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #0b0b0b, #000);
+    color: #fff;
+    min-height: 100vh;
+}
+
+/* ================= HEADER ================= */
+header {
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+
+.logo {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #0f0;
+    text-shadow: 0 0 20px #0f0;
+}
+
+.subtitle {
+    margin-top: 10px;
+    color: #aaa;
+    font-size: 1.1rem;
+}
+
+/* ================= SECTION ================= */
+.section {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+/* ================= FEATURE GRID ================= */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* ================= FEATURE CARD ================= */
+.feature-card {
+    background: linear-gradient(180deg, #111, #080808);
+    border-radius: 14px;
+    padding: 25px;
+    transition: 0.25s ease;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+}
+
+/* ================= CARD COLORS ================= */
+.feature-card.green {
+    box-shadow: 0 0 25px rgba(0,255,0,0.15);
+}
+.feature-card.blue {
+    box-shadow: 0 0 25px rgba(58,190,255,0.15);
+}
+.feature-card.purple {
+    box-shadow: 0 0 25px rgba(178,127,255,0.15);
+}
+.feature-card.gold {
+    box-shadow: 0 0 25px rgba(255,215,0,0.15);
+}
+
+/* ================= CARD TEXT ================= */
+.feature-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.feature-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0.95;
+}
+
+/* ================= INLINE COLORS ================= */
+.text-green { color: #0f0; }
+.text-blue { color: #3ABEFF; }
+.text-purple { color: #B27FFF; }
+.text-gold { color: #FFD700; }
+
+/* ================= LEVEL / PRICE BADGE ================= */
+.level, .price {
+    margin-top: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+.price { font-weight: 700; }
+
+/* ================= OLED DISPLAY ================= */
+.oled {
+    margin-top: 60px;
+    background: #020202;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: inset 0 0 25px rgba(0,255,0,0.2);
+}
+
+.oled-line {
+    font-family: monospace;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+    margin: 5px 0;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #666;
+    font-size: 0.9rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+    <div class="logo">BLACK OPS III</div>
+    <div class="subtitle">Recovery Dashboard</div>
+</header>
+
+<!-- ================= MAIN SECTION ================= -->
+<section class="section">
+    <div class="section-title">Recovery Options PS4/5 Only</div>
+
+    <div class="features-grid">
+
+        <!-- ZOMBIES -->
+<div class="feature-card green">
+    <div class="feature-name">🧟 Zombies Recovery</div>
+    <div class="feature-desc">
+        • <span class="text-green">Zombies Level</span><br>
+        • <span class="text-purple">Liquid Divinium</span><br>
+        • <span class="text-green">Zombies Unlock All</span><br>
+        • <span class="text-green">Zombies Prestige</span>
+    </div>
+    <div class="level text-green">Level: 1 – 35 / Master Prestige</div>
+    <div class="price text-green">Price: $4</div>
+</div>
+
+<!-- MULTIPLAYER -->
+<div class="feature-card blue">
+    <div class="feature-name">🎮 Multiplayer Recovery</div>
+    <div class="feature-desc">
+        • <span class="text-blue">Multiplayer Level</span><br>
+        • <span class="text-blue">Crypto Keys</span><br>
+        • <span class="text-blue">MP Unlock All</span><br>
+        • <span class="text-blue">MP Prestige</span>
+    </div>
+    <div class="level text-blue">Level: 1 – 55 / Master Prestige</div>
+    <div class="price text-blue">Price: $4</div>
+</div>
+
+        <!-- ACCOUNT -->
+        <div class="feature-card gold">
+            <div class="feature-name">🔐 Account Recovery</div>
+            <div class="feature-desc">
+                • <span class="text-gold">Full Unlock All</span><br>
+                • <span class="text-gold">Max Stats</span><br>
+                • <span class="text-purple">Liquid Divinium</span><br>
+                • <span class="text-blue">Crypto Keys</span>
+            </div>
+            <div class="price text-gold">Price: $8</div>
+        </div>
+
+    </div>
+
+    <!-- OLED DISPLAY -->
+    <div class="oled">
+        <div class="oled-line">Discord: o.binds</div>
+        <div class="oled-line">Instagram: o.binds</div>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    BO3 Recovery Dashboard • Use Responsibly
+</footer>
+
+</body>
+</html>
