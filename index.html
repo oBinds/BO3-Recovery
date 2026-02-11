@@ -11,177 +11,340 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
+    font-family: "Lucida Console", monospace;
 }
 
 body {
-    background: radial-gradient(circle at top, #0b0b0b, #000);
-    color: #fff;
+    background: #000;
+    color: #0f0;
     min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ================= SCANLINES ================= */
+body::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0.05) 1px,
+        rgba(0,0,0,0) 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
 }
 
 /* ================= HEADER ================= */
 header {
     text-align: center;
-    padding: 40px 20px 20px;
+    padding: 50px 20px 30px;
+    border-bottom: 2px solid #0f0;
+    position: relative;
 }
 
 .logo {
     font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: 2px;
+    font-weight: 900;
     color: #0f0;
-    text-shadow: 0 0 20px #0f0;
+    text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+    animation: flicker 2s infinite;
 }
 
 .subtitle {
     margin-top: 10px;
-    color: #aaa;
-    font-size: 1.1rem;
+    color: #0f0;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 22%, 24%, 55% { opacity: 0.4; }
 }
 
 /* ================= SECTION ================= */
 .section {
-    padding: 40px 20px;
+    padding: 50px 20px;
     max-width: 1200px;
     margin: auto;
 }
 
 .section-title {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff, 0 0 15px #0ff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* ================= FEATURE GRID ================= */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 30px;
 }
 
 /* ================= FEATURE CARD ================= */
 .feature-card {
-    background: linear-gradient(180deg, #111, #080808);
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 25px;
-    transition: 0.25s ease;
-    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 5px #0f0, 0 0 10px #0f0 inset;
+    transition: 0.3s ease, box-shadow 0.3s ease;
 }
 
-.feature-card:hover {
-    transform: translateY(-6px);
+/* Card hover gradient overlay */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(90deg, rgba(0,255,0,0.1), rgba(0,255,255,0.1), rgba(0,255,0,0.1));
+    transform: rotate(45deg);
+    transition: 0.6s ease;
+}
+
+.feature-card:hover::before {
+    transform: rotate(0deg) translate(10%,10%);
 }
 
 /* ================= CARD COLORS ================= */
-.feature-card.green {
-    box-shadow: 0 0 25px rgba(0,255,0,0.15);
+.zombies { 
+    border: 1px solid #0f0; 
+    box-shadow: 0 0 10px #0f0, 0 0 20px #0f0 inset;
 }
-.feature-card.blue {
-    box-shadow: 0 0 25px rgba(58,190,255,0.15);
+
+.multiplayer { 
+    border: 1px solid #3ABEFF; 
+    box-shadow: 0 0 10px #3ABEFF, 0 0 20px #3ABEFF inset;
 }
-.feature-card.purple {
-    box-shadow: 0 0 25px rgba(178,127,255,0.15);
+
+.account { 
+    border: 1px solid #FFD700; 
+    box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700 inset;
 }
-.feature-card.gold {
-    box-shadow: 0 0 25px rgba(255,215,0,0.15);
+
+/* ================= HOVER GLOW EFFECTS ================= */
+.zombies:hover {
+    box-shadow: 0 0 20px #0f0, 0 0 40px #0f0 inset;
+    transform: translateY(-6px);
+}
+
+.multiplayer:hover {
+    box-shadow: 0 0 20px #3ABEFF, 0 0 40px #3ABEFF inset;
+    transform: translateY(-6px);
+    animation: mpPulse 1.2s infinite alternate;
+}
+
+.account:hover {
+    box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700 inset;
+    transform: translateY(-6px);
+}
+
+/* Multiplayer pulse hover */
+@keyframes mpPulse {
+    0% { box-shadow: 0 0 15px #3ABEFF, 0 0 30px #3ABEFF inset; }
+    100% { box-shadow: 0 0 25px #3ABEFF, 0 0 40px #3ABEFF inset; }
 }
 
 /* ================= CARD TEXT ================= */
 .feature-name {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
+
+.zombies .feature-name { color: #0f0; text-shadow: 0 0 5px #0f0,0 0 10px #0f0; }
+.multiplayer .feature-name { color: #3ABEFF; text-shadow: 0 0 5px #3ABEFF,0 0 10px #3ABEFF; }
+.account .feature-name { color: #FFD700; text-shadow: 0 0 5px #FFD700,0 0 10px #FFD700; }
 
 .feature-desc {
     font-size: 1rem;
     line-height: 1.7;
-    opacity: 0.95;
 }
 
 /* ================= INLINE COLORS ================= */
-.text-green { color: #0f0; }
-.text-blue { color: #3ABEFF; }
-.text-purple { color: #B27FFF; }
-.text-gold { color: #FFD700; }
+.text-green { color: #0f0; text-shadow:0 0 3px #0f0; }
+.text-blue { color: #3ABEFF; text-shadow:0 0 3px #3ABEFF; }
+.text-purple { color: #B27FFF; text-shadow:0 0 3px #B27FFF; }
+.text-gold { color: #FFD700; text-shadow:0 0 3px #FFD700; }
 
 /* ================= LEVEL / PRICE BADGE ================= */
 .level, .price {
-    margin-top: 8px;
-    font-weight: 600;
+    margin-top: 12px;
+    font-weight: 700;
     font-size: 0.95rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    text-shadow: 0 0 5px #fff;
 }
-.price { font-weight: 700; }
 
 /* ================= OLED DISPLAY ================= */
 .oled {
     margin-top: 60px;
     background: #020202;
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 20px;
-    box-shadow: inset 0 0 25px rgba(0,255,0,0.2);
+    border: 1px solid #0f0;
+    box-shadow: inset 0 0 25px rgba(0,255,0,0.4);
+    font-family: monospace;
 }
 
 .oled-line {
-    font-family: monospace;
     color: #0f0;
-    text-shadow: 0 0 10px #0f0;
-    margin: 5px 0;
+    text-shadow: 0 0 5px #0f0;
+    margin: 6px 0;
+    position: relative;
+}
+
+.oled-line::after {
+    content: '_';
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 /* ================= FOOTER ================= */
 footer {
     text-align: center;
-    padding: 25px;
-    color: #666;
-    font-size: 0.9rem;
+    padding: 30px;
+    color: #0f0;
+    font-size: 0.95rem;
+    text-shadow: 0 0 3px #0f0;
+}
+
+/* ================= ZOMBIES BLOOD EFFECT ================= */
+.zombie-blood {
+    position:absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    top:0;
+    left:0;
+    z-index:1;
+}
+
+.zombie-blood span {
+    position:absolute;
+    width:2px;
+    height:20px;
+    background:rgba(255,0,0,0.7);
+    top:-20px;
+    animation:bloodFall 3s linear infinite;
+    border-radius:2px;
+}
+
+@keyframes bloodFall {
+    0% { transform: translateY(0) translateX(0); opacity:1; }
+    25% { transform: translateY(25%) translateX(4px); opacity:0.9; }
+    50% { transform: translateY(50%) translateX(-4px); opacity:0.8; }
+    75% { transform: translateY(75%) translateX(4px); opacity:0.6; }
+    100% { transform: translateY(100%) translateX(0); opacity:0; }
+}
+
+/* ================= MULTIPLAYER SPARK EFFECT ================= */
+.mp-sparks {
+    position:absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    top:0;
+    left:0;
+    z-index:1;
+}
+
+.mp-sparks span {
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:rgba(58,190,255,0.8);
+    border-radius:50%;
+    top:90%;
+    animation: sparkMove 2s linear infinite;
+}
+
+@keyframes sparkMove {
+    0% { transform: translateY(0) translateX(0); opacity:1; }
+    50% { transform: translateY(-80%) translateX(15px); opacity:0.6; }
+    100% { transform: translateY(-100%) translateX(0); opacity:0; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
 <header>
     <div class="logo">BLACK OPS III</div>
     <div class="subtitle">Recovery Dashboard</div>
 </header>
 
-<!-- ================= MAIN SECTION ================= -->
 <section class="section">
     <div class="section-title">Recovery Options PS4/5 Only</div>
 
     <div class="features-grid">
 
         <!-- ZOMBIES -->
-<div class="feature-card green">
-    <div class="feature-name">🧟 Zombies Recovery</div>
-    <div class="feature-desc">
-        • <span class="text-green">Zombies Level</span><br>
-        • <span class="text-purple">Liquid Divinium</span><br>
-        • <span class="text-green">Zombies Unlock All</span><br>
-        • <span class="text-green">Zombies Prestige</span>
-    </div>
-    <div class="level text-green">Level: 1 – 35 / Master Prestige</div>
-    <div class="price text-green">Price: $4</div>
-</div>
+        <div class="feature-card zombies">
+            <div class="zombie-blood">
+                <span style="left:5%; animation-delay:0s;"></span>
+                <span style="left:15%; animation-delay:0.5s;"></span>
+                <span style="left:25%; animation-delay:1s;"></span>
+                <span style="left:35%; animation-delay:1.2s;"></span>
+                <span style="left:45%; animation-delay:0.8s;"></span>
+                <span style="left:55%; animation-delay:1.2s;"></span>
+                <span style="left:65%; animation-delay:0.3s;"></span>
+                <span style="left:75%; animation-delay:1.7s;"></span>
+                <span style="left:85%; animation-delay:0.9s;"></span>
+            </div>
+            <div class="feature-name">🧟 Zombies Recovery</div>
+            <div class="feature-desc">
+                • <span class="text-green">Zombies Level</span><br>
+                • <span class="text-purple">Liquid Divinium</span><br>
+                • <span class="text-green">Zombies Unlock All</span><br>
+                • <span class="text-green">Zombies Prestige</span>
+            </div>
+            <div class="level text-green">Level: 1 – 35 / Master Prestige</div>
+            <div class="price text-green">Price: $4</div>
+        </div>
 
-<!-- MULTIPLAYER -->
-<div class="feature-card blue">
-    <div class="feature-name">🎮 Multiplayer Recovery</div>
-    <div class="feature-desc">
-        • <span class="text-blue">Multiplayer Level</span><br>
-        • <span class="text-blue">Crypto Keys</span><br>
-        • <span class="text-blue">MP Unlock All</span><br>
-        • <span class="text-blue">MP Prestige</span>
-    </div>
-    <div class="level text-blue">Level: 1 – 55 / Master Prestige</div>
-    <div class="price text-blue">Price: $4</div>
-</div>
+        <!-- MULTIPLAYER -->
+        <div class="feature-card multiplayer">
+            <div class="mp-sparks">
+                <span style="left:10%; animation-delay:0s;"></span>
+                <span style="left:25%; animation-delay:0.3s;"></span>
+                <span style="left:40%; animation-delay:0.6s;"></span>
+                <span style="left:55%; animation-delay:0.9s;"></span>
+                <span style="left:70%; animation-delay:1.2s;"></span>
+                <span style="left:85%; animation-delay:1.5s;"></span>
+            </div>
+            <div class="feature-name">🎮 Multiplayer Recovery</div>
+            <div class="feature-desc">
+                • <span class="text-blue">Multiplayer Level</span><br>
+                • <span class="text-blue">Crypto Keys</span><br>
+                • <span class="text-blue">MP Unlock All</span><br>
+                • <span class="text-blue">MP Prestige</span>
+            </div>
+            <div class="level text-blue">Level: 1 – 55 / Master Prestige</div>
+            <div class="price text-blue">Price: $4</div>
+        </div>
 
         <!-- ACCOUNT -->
-        <div class="feature-card gold">
+        <div class="feature-card account">
             <div class="feature-name">🔐 Account Recovery</div>
             <div class="feature-desc">
                 • <span class="text-gold">Full Unlock All</span><br>
@@ -194,16 +357,14 @@ footer {
 
     </div>
 
-    <!-- OLED DISPLAY -->
     <div class="oled">
         <div class="oled-line">Discord: o.binds</div>
         <div class="oled-line">Instagram: o.binds</div>
     </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
 <footer>
-    BO3 Recovery Dashboard • Use Responsibly
+    BO3 Recovery By Binds
 </footer>
 
 </body>
