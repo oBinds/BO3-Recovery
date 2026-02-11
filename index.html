@@ -41,23 +41,27 @@ header {
     text-align: center;
     padding: 50px 20px 30px;
     border-bottom: 2px solid #0f0;
+    position: relative;
 }
 
 .logo {
     font-size: 3rem;
     font-weight: 900;
-    text-shadow: 0 0 20px #0f0;
+    color: #0f0;
+    text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
     animation: flicker 2s infinite;
 }
 
 .subtitle {
     margin-top: 10px;
+    color: #0f0;
+    font-size: 1.2rem;
     opacity: 0.8;
 }
 
 @keyframes flicker {
-    0%,100% { opacity:1 }
-    50% { opacity:.6 }
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 22%, 24%, 55% { opacity: 0.4; }
 }
 
 /* ================= SECTION ================= */
@@ -72,6 +76,9 @@ header {
     font-size: 2.2rem;
     margin-bottom: 40px;
     color: #0ff;
+    text-shadow: 0 0 5px #0ff, 0 0 15px #0ff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* ================= FEATURE GRID ================= */
@@ -87,38 +94,105 @@ header {
     padding: 25px;
     position: relative;
     overflow: hidden;
-    transition: 0.3s;
+    box-shadow: 0 0 5px #0f0, 0 0 10px #0f0 inset;
+    transition: 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* overlay */
+/* Card hover gradient overlay */
 .feature-card::before {
-    content:'';
-    position:absolute;
-    inset:-50%;
-    background:linear-gradient(90deg,rgba(0,255,0,.1),rgba(0,255,255,.1),rgba(0,255,0,.1));
-    transform:rotate(45deg);
-    transition:.6s;
-    pointer-events:none;
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(90deg, rgba(0,255,0,0.1), rgba(0,255,255,0.1), rgba(0,255,0,0.1));
+    transform: rotate(45deg);
+    transition: 0.6s ease;
+    pointer-events: none; /* ensures clicks go through overlay */
 }
 
 .feature-card:hover::before {
-    transform:rotate(0deg);
+    transform: rotate(0deg) translate(10%,10%);
 }
 
-/* ================= COLORS ================= */
-.zombies { border:1px solid #0f0; box-shadow:0 0 20px #0f0 inset; }
-.multiplayer { border:1px solid #3ABEFF; box-shadow:0 0 20px #3ABEFF inset; }
-.account { border:1px solid #FFD700; box-shadow:0 0 20px #FFD700 inset; }
+/* ================= CARD COLORS ================= */
+.zombies { 
+    border: 1px solid #0f0; 
+    box-shadow: 0 0 10px #0f0, 0 0 20px #0f0 inset;
+}
 
-/* ================= TEXT ================= */
-.feature-name { font-size:1.4rem; margin-bottom:10px; }
-.feature-desc { line-height:1.7; }
+.multiplayer { 
+    border: 1px solid #3ABEFF; 
+    box-shadow: 0 0 10px #3ABEFF, 0 0 20px #3ABEFF inset;
+}
+
+.account { 
+    border: 1px solid #FFD700; 
+    box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700 inset;
+}
+
+/* ================= HOVER GLOW EFFECTS ================= */
+.zombies:hover {
+    box-shadow: 0 0 20px #0f0, 0 0 40px #0f0 inset;
+    transform: translateY(-6px);
+}
+
+.multiplayer:hover {
+    box-shadow: 0 0 20px #3ABEFF, 0 0 40px #3ABEFF inset;
+    transform: translateY(-6px);
+    animation: mpPulse 1.2s infinite alternate;
+}
+
+.account:hover {
+    box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700 inset;
+    transform: translateY(-6px);
+}
+
+/* Multiplayer pulse hover */
+@keyframes mpPulse {
+    0% { box-shadow: 0 0 15px #3ABEFF, 0 0 30px #3ABEFF inset; }
+    100% { box-shadow: 0 0 25px #3ABEFF, 0 0 40px #3ABEFF inset; }
+}
+
+/* ================= CARD TEXT ================= */
+.feature-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.zombies .feature-name { color: #0f0; text-shadow: 0 0 5px #0f0,0 0 10px #0f0; }
+.multiplayer .feature-name { color: #3ABEFF; text-shadow: 0 0 5px #3ABEFF,0 0 10px #3ABEFF; }
+.account .feature-name { color: #FFD700; text-shadow: 0 0 5px #FFD700,0 0 10px #FFD700; }
+
+.feature-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* ================= INLINE COLORS ================= */
+.text-green { color: #0f0; text-shadow:0 0 3px #0f0; }
+.text-blue { color: #3ABEFF; text-shadow:0 0 3px #3ABEFF; }
+.text-purple { color: #B27FFF; text-shadow:0 0 3px #B27FFF; }
+.text-gold { color: #FFD700; text-shadow:0 0 3px #FFD700; }
+
+/* ================= LEVEL / PRICE BADGE ================= */
+.level, .price {
+    margin-top: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    text-shadow: 0 0 5px #fff;
+}
 
 /* ================= FORMS ================= */
 .feature-card form {
     margin-top: 15px;
     position: relative;
-    z-index: 5;
+    z-index: 5; /* ensures inputs are above animations */
 }
 
 .feature-card input {
@@ -129,6 +203,9 @@ header {
     border: 1px solid currentColor;
     color: currentColor;
     outline: none;
+    border-radius: 4px;
+    z-index: 5;
+    position: relative;
 }
 
 .feature-card button {
@@ -139,6 +216,7 @@ header {
     border: 1px solid currentColor;
     color: currentColor;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 .feature-card button:hover {
@@ -146,72 +224,89 @@ header {
     color: #000;
 }
 
-/* ================= FIX CLICK ISSUE ================= */
-.feature-card::before,
-.zombie-blood,
-.mp-sparks {
-    pointer-events: none;
-}
-
-.feature-card * {
-    position: relative;
-    z-index: 2;
-}
-
-/* ================= EFFECTS ================= */
-.zombie-blood, .mp-sparks {
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-}
-
-.zombie-blood span {
-    position:absolute;
-    width:2px;
-    height:20px;
-    background:red;
-    top:-20px;
-    animation: blood 3s linear infinite;
-}
-
-@keyframes blood {
-    to { transform:translateY(120%); opacity:0 }
-}
-
-.mp-sparks span {
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:#3ABEFF;
-    border-radius:50%;
-    top:90%;
-    animation: spark 2s linear infinite;
-}
-
-@keyframes spark {
-    to { transform:translateY(-120%); opacity:0 }
-}
-
-/* ================= OLED ================= */
+/* ================= OLED DISPLAY ================= */
 .oled {
     margin-top: 60px;
+    background: #020202;
+    border-radius: 12px;
     padding: 20px;
     border: 1px solid #0f0;
+    box-shadow: inset 0 0 25px rgba(0,255,0,0.4);
+    font-family: monospace;
+}
+
+.oled-line {
+    color: #0f0;
+    text-shadow: 0 0 5px #0f0;
+    margin: 6px 0;
+    position: relative;
 }
 
 .oled-line::after {
-    content:'_';
-    animation: blink 1s infinite;
+    content: '_';
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 1s steps(2, start) infinite;
 }
 
 @keyframes blink {
-    50% { opacity:0 }
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 /* ================= FOOTER ================= */
 footer {
     text-align: center;
     padding: 30px;
+    color: #0f0;
+    font-size: 0.95rem;
+    text-shadow: 0 0 3px #0f0;
+}
+
+/* ================= ZOMBIES BLOOD EFFECT ================= */
+.zombie-blood, .mp-sparks {
+    position:absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none; /* ensures clicks go through */
+    overflow:hidden;
+    top:0;
+    left:0;
+    z-index:1;
+}
+
+.zombie-blood span {
+    position:absolute;
+    width:2px;
+    height:20px;
+    background:rgba(255,0,0,0.7);
+    top:-20px;
+    animation:bloodFall 3s linear infinite;
+    border-radius:2px;
+}
+
+@keyframes bloodFall {
+    0% { transform: translateY(0) translateX(0); opacity:1; }
+    25% { transform: translateY(25%) translateX(4px); opacity:0.9; }
+    50% { transform: translateY(50%) translateX(-4px); opacity:0.8; }
+    75% { transform: translateY(75%) translateX(4px); opacity:0.6; }
+    100% { transform: translateY(100%) translateX(0); opacity:0; }
+}
+
+.mp-sparks span {
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:rgba(58,190,255,0.8);
+    border-radius:50%;
+    top:90%;
+    animation: sparkMove 2s linear infinite;
+}
+
+@keyframes sparkMove {
+    0% { transform: translateY(0) translateX(0); opacity:1; }
+    50% { transform: translateY(-80%) translateX(15px); opacity:0.6; }
+    100% { transform: translateY(-100%) translateX(0); opacity:0; }
 }
 </style>
 </head>
@@ -224,67 +319,80 @@ footer {
 </header>
 
 <section class="section">
-<div class="section-title">Recovery Options PS4/5 Only</div>
+    <div class="section-title">Recovery Options PS4/5 Only</div>
 
-<div class="features-grid">
+    <div class="features-grid">
 
-<!-- ZOMBIES -->
-<div class="feature-card zombies">
-<div class="zombie-blood"><span style="left:10%"></span></div>
-<div class="feature-name">🧟 Zombies Recovery</div>
-<div class="feature-desc">Level • Unlock All • Prestige</div>
-<div>Price: $4 — Cash App <b>$oBindss</b></div>
+        <!-- ZOMBIES -->
+        <div class="feature-card zombies">
+            <div class="feature-name">🧟 Zombies Recovery</div>
+            <div class="feature-desc">
+                • <span class="text-green">Zombies Level</span><br>
+                • <span class="text-purple">Liquid Divinium</span><br>
+                • <span class="text-green">Zombies Unlock All</span><br>
+                • <span class="text-green">Zombies Prestige</span>
+            </div>
+            <div class="level text-green">Level: 1 – 35 / Master Prestige</div>
+            <div class="price text-green">Price: $4</div>
 
-<form action="https://formsubmit.co/bindsog@gmail.com" method="POST">
-<input type="hidden" name="service" value="Zombies Recovery">
-<input type="text" name="psn" placeholder="PSN Username" required>
-<input type="text" name="discord" placeholder="Discord" required>
-<input type="text" name="cashapp" placeholder="Cash App name (who paid)" required>
-<button type="submit">Submit Zombies Order</button>
-</form>
-</div>
+            <form action="https://formsubmit.co/bindsog@gmail.com" method="POST">
+                <input type="hidden" name="service" value="Zombies Recovery">
+                <input type="text" name="discord" placeholder="Discord" required>
+                <input type="text" name="cashapp" placeholder="Cash App name (who paid)" required>
+                <button type="submit">Submit Zombies Order</button>
+            </form>
+        </div>
 
-<!-- MULTIPLAYER -->
-<div class="feature-card multiplayer">
-<div class="mp-sparks"><span style="left:20%"></span></div>
-<div class="feature-name">🎮 Multiplayer Recovery</div>
-<div class="feature-desc">Level • Unlock All • Prestige</div>
-<div>Price: $4 — Cash App <b>$oBindss</b></div>
+        <!-- MULTIPLAYER -->
+        <div class="feature-card multiplayer">
+            <div class="feature-name">🎮 Multiplayer Recovery</div>
+            <div class="feature-desc">
+                • <span class="text-blue">Multiplayer Level</span><br>
+                • <span class="text-blue">Crypto Keys</span><br>
+                • <span class="text-blue">MP Unlock All</span><br>
+                • <span class="text-blue">MP Prestige</span>
+            </div>
+            <div class="level text-blue">Level: 1 – 55 / Master Prestige</div>
+            <div class="price text-blue">Price: $4</div>
 
-<form action="https://formsubmit.co/bindsog@gmail.com" method="POST">
-<input type="hidden" name="service" value="Multiplayer Recovery">
-<input type="text" name="psn" placeholder="PSN Username" required>
-<input type="text" name="discord" placeholder="Discord" required>
-<input type="text" name="cashapp" placeholder="Cash App name (who paid)" required>
-<button type="submit">Submit MP Order</button>
-</form>
-</div>
+            <form action="https://formsubmit.co/bindsog@gmail.com" method="POST">
+                <input type="hidden" name="service" value="Multiplayer Recovery">
+                <input type="text" name="discord" placeholder="Discord" required>
+                <input type="text" name="cashapp" placeholder="Cash App name (who paid)" required>
+                <button type="submit">Submit Multiplayer Order</button>
+            </form>
+        </div>
 
-<!-- ACCOUNT -->
-<div class="feature-card account">
-<div class="zombie-blood"><span style="left:30%"></span></div>
-<div class="feature-name">🔐 Account Recovery</div>
-<div class="feature-desc">Full Unlock All • Max Stats</div>
-<div>Price: $8 — Cash App <b>$oBindss</b></div>
+        <!-- ACCOUNT -->
+        <div class="feature-card account">
+            <div class="feature-name">🔐 Account Recovery</div>
+            <div class="feature-desc">
+                • <span class="text-gold">Full Unlock All</span><br>
+                • <span class="text-gold">Max Stats</span><br>
+                • <span class="text-purple">Liquid Divinium</span><br>
+                • <span class="text-blue">Crypto Keys</span>
+            </div>
+            <div class="price text-gold">Price: $8</div>
 
-<form action="https://formsubmit.co/bindsog@gmail.com" method="POST">
-<input type="hidden" name="service" value="Full Account Recovery">
-<input type="text" name="psn" placeholder="PSN Username" required>
-<input type="text" name="discord" placeholder="Discord" required>
-<input type="text" name="cashapp" placeholder="Cash App name (who paid)" required>
-<button type="submit">Submit Account Order</button>
-</form>
-</div>
+            <form action="https://formsubmit.co/bindsog@gmail.com" method="POST">
+                <input type="hidden" name="service" value="Full Account Recovery">
+                <input type="text" name="discord" placeholder="Discord" required>
+                <input type="text" name="cashapp" placeholder="Cash App name (who paid)" required>
+                <button type="submit">Submit Account Order</button>
+            </form>
+        </div>
 
-</div>
+    </div>
 
-<div class="oled">
-<div class="oled-line">Discord: o.binds</div>
-<div class="oled-line">Instagram: o.binds</div>
-</div>
+    <div class="oled">
+        <div class="oled-line">Discord: o.binds</div>
+        <div class="oled-line">Instagram: o.binds</div>
+    </div>
 </section>
 
-<footer>BO3 Recovery By Binds</footer>
+<footer>
+    BO3 Recovery By Binds
+</footer>
 
 </body>
 </html>
